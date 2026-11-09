@@ -1,0 +1,688 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#05080e">
+<meta name="description" content="The official digital home of Mark Garbee — technology, cybersecurity, programming and digital innovation.">
+<meta name="author" content="Mark Garbee">
+<title>Mark Garbee — Technology & Cybersecurity</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:#05080e;
+  --panel:#0a101a;
+  --blue:#438cff;
+  --cyan:#75d5ff;
+  --white:#edf4ff;
+  --muted:#8390a5;
+  --line:rgba(145,174,215,.13);
+  --mono:"DM Mono",monospace;
+  --font:"Manrope",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{
+  background:var(--bg);color:var(--white);
+  font-family:var(--font);overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+::selection{background:#438cff;color:white}
+
+/* BACKGROUND */
+#world{
+  position:fixed;inset:0;width:100%;height:100%;
+  z-index:0;pointer-events:none;
+}
+.ambient{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+  radial-gradient(ellipse at 70% 30%,rgba(25,91,190,.13),transparent 45%),
+  radial-gradient(ellipse at 10% 80%,rgba(16,67,130,.10),transparent 40%);
+}
+.noise{
+  position:fixed;inset:0;z-index:1;pointer-events:none;
+  opacity:.12;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.2'/%3E%3C/svg%3E");
+}
+main,header,footer{position:relative;z-index:2}
+.container{width:min(1160px,90%);margin:auto}
+
+/* NAVIGATION */
+header{
+  position:fixed;top:0;width:100%;z-index:20;
+  border-bottom:1px solid var(--line);
+  background:rgba(5,8,14,.78);
+  backdrop-filter:blur(18px);
+}
+.nav{
+  height:76px;display:flex;align-items:center;
+  justify-content:space-between;
+}
+.logo{font-size:17px;font-weight:800;letter-spacing:-1px}
+.logo span{color:var(--blue)}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{
+  font-size:12px;color:#aebbd0;
+  transition:.25s;
+}
+.nav-links a:hover{color:white}
+.nav-cta{
+  border:1px solid rgba(67,140,255,.5);
+  padding:11px 17px;border-radius:4px;
+  font-size:11px;font-weight:700;
+  color:#bcd7ff;transition:.3s;
+}
+.nav-cta:hover{background:var(--blue);color:white}
+.menu-btn{
+  display:none;background:none;border:0;
+  color:white;font-size:25px;cursor:pointer;
+}
+
+/* HERO */
+.hero{
+  min-height:850px;height:100vh;max-height:1050px;
+  display:flex;align-items:center;
+  padding-top:76px;position:relative;
+}
+.hero-content{max-width:800px;padding-bottom:20px}
+.eyebrow{
+  display:flex;align-items:center;gap:12px;
+  font:11px var(--mono);letter-spacing:2px;
+  color:#8abaff;text-transform:uppercase;
+}
+.dot{
+  width:7px;height:7px;border-radius:50%;
+  background:#4c9aff;box-shadow:0 0 14px #4c9aff;
+}
+.hero h1{
+  font-size:clamp(58px,9.5vw,112px);
+  line-height:.98;letter-spacing:-8px;
+  font-weight:800;margin:35px 0 25px;
+}
+.hero h1 .outline{
+  display:block;color:transparent;
+  -webkit-text-stroke:1px rgba(164,193,237,.68);
+}
+.hero-description{
+  max-width:560px;color:#9aa9be;
+  line-height:1.9;font-size:15px;
+}
+.hero-description strong{color:#e9f2ff;font-weight:600}
+.hero-actions{display:flex;gap:14px;margin-top:37px;flex-wrap:wrap}
+.btn{
+  padding:15px 23px;border-radius:4px;
+  display:inline-flex;align-items:center;gap:12px;
+  font-size:12px;font-weight:700;transition:.3s;
+}
+.btn-primary{
+  background:#327ce9;color:white;
+  box-shadow:0 0 35px rgba(50,124,233,.2);
+}
+.btn-primary:hover{background:#579aff;transform:translateY(-3px)}
+.btn-secondary{border:1px solid var(--line);color:#c3d1e5}
+.btn-secondary:hover{border-color:var(--blue)}
+.hero-meta{
+  margin-top:75px;display:flex;gap:45px;flex-wrap:wrap;
+}
+.meta-item{font:10px var(--mono);color:#70819a;letter-spacing:1px}
+.meta-item span{display:block;color:#d6e3f5;font-size:11px;margin-top:8px}
+.hero-index{
+  position:absolute;right:0;bottom:65px;
+  font:10px var(--mono);color:#65758d;
+}
+.hero-index span{color:var(--blue)}
+
+/* DECORATION */
+.side-label{
+  position:absolute;right:0;top:43%;
+  writing-mode:vertical-rl;
+  font:9px var(--mono);letter-spacing:3px;color:#64758e;
+}
+.cross{
+  position:absolute;width:13px;height:13px;
+  border:1px solid rgba(111,160,229,.5);
+}
+.cross.one{top:22%;right:20%}
+.cross.two{bottom:23%;right:35%}
+
+/* SECTIONS */
+section{padding:115px 0}
+.section-top{
+  display:flex;justify-content:space-between;
+  align-items:center;gap:20px;margin-bottom:50px;
+}
+.section-number{font:11px var(--mono);color:var(--blue)}
+.section-title{
+  font-size:clamp(30px,5vw,49px);
+  letter-spacing:-2px;line-height:1.15;
+}
+.section-sub{
+  font:10px var(--mono);color:#718198;
+  letter-spacing:1px;margin-top:13px;
+}
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:75px;
+}
+.about-text{color:#9baac0;font-size:14px;line-height:2}
+.about-text p+p{margin-top:20px}
+.about-text strong{color:white}
+.identity-card{
+  border:1px solid var(--line);
+  background:linear-gradient(145deg,rgba(16,29,49,.85),rgba(7,12,20,.8));
+  padding:30px;position:relative;overflow:hidden;
+}
+.identity-card:after{
+  content:"";position:absolute;width:190px;height:190px;
+  right:-90px;top:-90px;border:1px solid rgba(67,140,255,.2);
+  border-radius:50%;box-shadow:0 0 0 25px rgba(67,140,255,.025),0 0 0 50px rgba(67,140,255,.02);
+}
+.card-label{font:10px var(--mono);color:#7faeff;letter-spacing:2px}
+.identity-card h3{font-size:26px;margin:20px 0 8px}
+.identity-card p{color:#899bb4;font-size:12px;line-height:1.8}
+.card-line{height:1px;background:var(--line);margin:27px 0}
+.card-detail{display:flex;justify-content:space-between;gap:15px;margin:14px 0;font-size:11px}
+.card-detail span:first-child{color:#718198}
+.card-detail span:last-child{color:#dce8f8}
+
+/* FOCUS */
+.focus-section{background:linear-gradient(180deg,transparent,rgba(10,20,35,.55),transparent)}
+.focus-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+.focus-card{
+  min-height:220px;padding:27px;
+  background:rgba(10,16,26,.75);
+  border:1px solid var(--line);
+  transition:.35s;position:relative;overflow:hidden;
+}
+.focus-card:hover{
+  transform:translateY(-6px);
+  border-color:rgba(67,140,255,.5);
+  background:rgba(14,28,49,.9);
+}
+.focus-icon{
+  width:42px;height:42px;border:1px solid rgba(67,140,255,.3);
+  display:grid;place-items:center;color:#7cb2ff;
+  font-size:18px;margin-bottom:28px;
+}
+.focus-card h3{font-size:16px;margin-bottom:12px}
+.focus-card p{font-size:12px;line-height:1.8;color:#8292a9}
+.card-arrow{position:absolute;right:25px;top:25px;color:#526986}
+
+/* PROJECTS */
+.project-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.project{
+  border:1px solid var(--line);
+  background:rgba(10,16,26,.78);
+  padding:30px;min-height:240px;transition:.3s;
+}
+.project:hover{border-color:rgba(67,140,255,.5)}
+.project-top{display:flex;justify-content:space-between}
+.project-status{font:9px var(--mono);color:#7faeff;letter-spacing:1px}
+.project h3{font-size:20px;margin:35px 0 12px}
+.project p{font-size:12px;line-height:1.8;color:#899ab1}
+.project-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.project-tags span{
+  font:9px var(--mono);padding:7px 9px;
+  border:1px solid var(--line);color:#8da4c3;
+}
+.project-note{
+  margin-top:20px;font-size:11px;
+  color:#718198;line-height:1.8;
+}
+
+/* CONTACT */
+.contact-box{
+  padding:65px;background:
+  radial-gradient(ellipse at 80% 50%,rgba(42,105,195,.16),transparent 55%),
+  #0a111d;
+  border:1px solid rgba(87,139,211,.2);
+  text-align:center;
+}
+.contact-box h2{
+  font-size:clamp(32px,6vw,58px);
+  letter-spacing:-3px;margin:18px 0;
+}
+.contact-box p{
+  max-width:480px;margin:auto;
+  color:#91a2ba;font-size:13px;line-height:1.9;
+}
+.contact-box .btn{margin-top:30px}
+
+/* FOOTER */
+footer{border-top:1px solid var(--line);padding:30px 0}
+.footer-inner{
+  display:flex;justify-content:space-between;
+  align-items:center;gap:20px;flex-wrap:wrap;
+}
+.footer-inner p{font:10px var(--mono);color:#708098}
+.footer-links{display:flex;gap:22px}
+.footer-links a{font-size:11px;color:#8b9ab0}
+.footer-links a:hover{color:white}
+
+/* REVEAL */
+.reveal{
+  opacity:0;transform:translateY(25px);
+  transition:opacity .8s ease,transform .8s ease;
+}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:800px){
+  .nav-links{
+    display:none;position:absolute;top:76px;left:0;width:100%;
+    padding:25px 5%;background:#080e18;
+    border-bottom:1px solid var(--line);
+    flex-direction:column;align-items:flex-start;gap:24px;
+  }
+  .nav-links.open{display:flex}
+  .menu-btn{display:block}
+  .nav-cta{display:none}
+  .hero{min-height:760px;height:auto;padding:155px 0 100px}
+  .hero h1{letter-spacing:-5px}
+  .hero-meta{gap:25px;margin-top:55px}
+  .about-grid{grid-template-columns:1fr;gap:35px}
+  .focus-grid{grid-template-columns:1fr 1fr}
+  .project-grid{grid-template-columns:1fr}
+  section{padding:85px 0}
+  .side-label{display:none}
+}
+@media(max-width:500px){
+  .container{width:88%}
+  .hero h1{font-size:58px;letter-spacing:-4px}
+  .hero-description{font-size:13px}
+  .hero-meta{gap:20px}
+  .focus-grid{grid-template-columns:1fr}
+  .focus-card{min-height:190px}
+  .contact-box{padding:40px 20px}
+  .section-top{align-items:flex-start}
+  .hero-index{bottom:30px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    scroll-behavior:auto!important;
+    animation:none!important;transition:none!important;
+  }
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="world"></canvas>
+<div class="ambient"></div>
+<div class="noise"></div>
+
+<header>
+  <div class="container nav">
+    <a href="#home" class="logo">MARK<span>.</span>GARBEE</a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#focus">Expertise</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <a href="#contact" class="nav-cta">LET'S CONNECT ↗</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation">☰</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero container" id="home">
+    <div class="cross one"></div>
+    <div class="cross two"></div>
+    <div class="side-label">TECHNOLOGY / CYBERSPACE / INNOVATION</div>
+
+    <div class="hero-content">
+      <div class="eyebrow">
+        <span class="dot"></span>
+        PERSONAL DIGITAL IDENTITY
+      </div>
+
+      <h1>
+        MARK
+        <span class="outline">GARBEE.</span>
+      </h1>
+
+      <p class="hero-description">
+        Exploring the intersection of <strong>technology,
+        cybersecurity and digital innovation.</strong>
+        Building knowledge, developing practical skills,
+        and creating meaningful things for the digital world.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#about" class="btn btn-primary">DISCOVER MY WORLD ↗</a>
+        <a href="#projects" class="btn btn-secondary">EXPLORE PROJECTS</a>
+      </div>
+
+      <div class="hero-meta">
+        <div class="meta-item">FIELD<span>TECHNOLOGY</span></div>
+        <div class="meta-item">SPECIAL INTEREST<span>CYBERSECURITY</span></div>
+        <div class="meta-item">APPROACH<span>LEARN · BUILD · INNOVATE</span></div>
+      </div>
+    </div>
+
+    <div class="hero-index"><span>01</span> / 04</div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="section-top reveal">
+        <div>
+          <div class="section-number">01 — INTRODUCTION</div>
+          <h2 class="section-title">Beyond the screen.</h2>
+          <p class="section-sub">A LITTLE ABOUT MARK</p>
+        </div>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p>
+            I'm <strong>Mark Garbee</strong>, a technology enthusiast
+            interested in understanding how the digital world works
+            and how technology can be used to create meaningful solutions.
+          </p>
+          <p>
+            My interests include cybersecurity, ethical hacking,
+            programming, networking, open-source technology and
+            digital creativity.
+          </p>
+          <p>
+            I believe in learning through exploration, building
+            practical projects, and continuously developing my
+            technical abilities.
+          </p>
+        </div>
+
+        <div class="identity-card reveal">
+          <div class="card-label">IDENTITY / PROFILE_001</div>
+          <h3>Mark Garbee</h3>
+          <p>Technology & Cybersecurity Enthusiast</p>
+          <div class="card-line"></div>
+          <div class="card-detail"><span>Primary field</span><span>Technology</span></div>
+          <div class="card-detail"><span>Interests</span><span>Cybersecurity</span></div>
+          <div class="card-detail"><span>Development</span><span>Programming</span></div>
+          <div class="card-detail"><span>Mindset</span><span>Continuous learning</span></div>
+          <div class="card-detail"><span>Digital presence</span><span>Building</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="focus-section" id="focus">
+    <div class="container">
+      <div class="section-top reveal">
+        <div>
+          <div class="section-number">02 — AREAS OF INTEREST</div>
+          <h2 class="section-title">What drives me.</h2>
+          <p class="section-sub">EXPLORING THE DIGITAL FRONTIER</p>
+        </div>
+      </div>
+
+      <div class="focus-grid">
+        <article class="focus-card reveal">
+          <span class="card-arrow">↗</span>
+          <div class="focus-icon">⌘</div>
+          <h3>Cybersecurity</h3>
+          <p>Exploring digital security, system protection, security awareness and responsible cybersecurity practices.</p>
+        </article>
+
+        <article class="focus-card reveal">
+          <span class="card-arrow">↗</span>
+          <div class="focus-icon">⌕</div>
+          <h3>Ethical Hacking & OSINT</h3>
+          <p>Learning about authorized security testing, digital investigations and responsible open-source intelligence.</p>
+        </article>
+
+        <article class="focus-card reveal">
+          <span class="card-arrow">↗</span>
+          <div class="focus-icon">&lt;/&gt;</div>
+          <h3>Programming</h3>
+          <p>Exploring programming languages and developing useful applications and digital experiences.</p>
+        </article>
+
+        <article class="focus-card reveal">
+          <span class="card-arrow">↗</span>
+          <div class="focus-icon">⌁</div>
+          <h3>Networking</h3>
+          <p>Understanding network infrastructure, communication protocols and connected systems.</p>
+        </article>
+
+        <article class="focus-card reveal">
+          <span class="card-arrow">↗</span>
+          <div class="focus-icon">◈</div>
+          <h3>Digital Innovation</h3>
+          <p>Exploring creative technologies and new ways to solve problems through digital tools.</p>
+        </article>
+
+        <article class="focus-card reveal">
+          <span class="card-arrow">↗</span>
+          <div class="focus-icon">◎</div>
+          <h3>Open Source</h3>
+          <p>Discovering open-source tools, communities and collaborative software development.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <div class="section-top reveal">
+        <div>
+          <div class="section-number">03 — WORK & DEVELOPMENT</div>
+          <h2 class="section-title">Building in public.</h2>
+          <p class="section-sub">PROJECTS AND TECHNICAL EXPLORATION</p>
+        </div>
+      </div>
+
+      <div class="project-grid">
+        <article class="project reveal">
+          <div class="project-top">
+            <span class="project-status">01 / PERSONAL BRAND</span>
+            <span>↗</span>
+          </div>
+          <h3>Digital Identity</h3>
+          <p>Developing a professional digital presence through web development, technology and personal branding.</p>
+          <div class="project-tags">
+            <span>HTML</span><span>CSS</span><span>WEB DEVELOPMENT</span>
+          </div>
+        </article>
+
+        <article class="project reveal">
+          <div class="project-top">
+            <span class="project-status">02 / DEVELOPMENT</span>
+            <span>↗</span>
+          </div>
+          <h3>Technical Experiments</h3>
+          <p>A space for documenting future programming experiments, learning exercises and practical technology projects.</p>
+          <div class="project-tags">
+            <span>PROGRAMMING</span><span>LEARNING</span><span>EXPLORATION</span>
+          </div>
+        </article>
+      </div>
+
+      <p class="project-note">
+        This portfolio will grow as new projects are completed and documented.
+        Only completed and verifiable work will be presented as finished projects.
+      </p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="contact-box reveal">
+        <div class="section-number">04 — CONNECTION</div>
+        <h2>Let's connect.</h2>
+        <p>
+          Interested in technology, cybersecurity, collaboration
+          or sharing ideas? Find me on GitHub or get in touch.
+        </p>
+        <a href="https://github.com/markgarbee"
+           target="_blank" rel="noopener noreferrer"
+           class="btn btn-primary">
+           VISIT MY GITHUB ↗
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <p>© <span id="year"></span> MARK GARBEE. ALL RIGHTS RESERVED.</p>
+    <div class="footer-links">
+      <a href="#home">BACK TO TOP ↑</a>
+      <a href="https://github.com/markgarbee" target="_blank" rel="noopener noreferrer">GITHUB ↗</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* MOBILE NAVIGATION */
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+
+menuBtn.addEventListener("click", () => {
+  const open = navLinks.classList.toggle("open");
+  menuBtn.textContent = open ? "✕" : "☰";
+  menuBtn.setAttribute("aria-expanded", String(open));
+});
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menuBtn.textContent = "☰";
+    menuBtn.setAttribute("aria-expanded", "false");
+  });
+});
+
+/* CURRENT YEAR */
+document.getElementById("year").textContent = new Date().getFullYear();
+
+/* SCROLL REVEAL */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target);
+    }
+  });
+}, {threshold:0.12});
+
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+/* INTERACTIVE DIGITAL PARTICLE ENVIRONMENT */
+const canvas = document.getElementById("world");
+const ctx = canvas.getContext("2d");
+
+let width, height, particles = [];
+let mouse = {x:-1000,y:-1000};
+let animationFrame;
+
+const reducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
+
+function resize(){
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  width = window.innerWidth;
+  height = window.innerHeight;
+  canvas.width = width*dpr;
+  canvas.height = height*dpr;
+  canvas.style.width = width+"px";
+  canvas.style.height = height+"px";
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+
+  const count = Math.min(100, Math.floor(width*height/13000));
+  particles = Array.from({length:count}, () => ({
+    x:Math.random()*width,
+    y:Math.random()*height,
+    vx:(Math.random()-.5)*.22,
+    vy:(Math.random()-.5)*.22,
+    size:Math.random()*1.5+.5
+  }));
+}
+
+function draw(){
+  ctx.clearRect(0,0,width,height);
+
+  for(let i=0;i<particles.length;i++){
+    const p=particles[i];
+
+    if(!reducedMotion){
+      p.x+=p.vx;
+      p.y+=p.vy;
+      if(p.x<0||p.x>width)p.vx*=-1;
+      if(p.y<0||p.y>height)p.vy*=-1;
+    }
+
+    const dx=mouse.x-p.x;
+    const dy=mouse.y-p.y;
+    const distance=Math.sqrt(dx*dx+dy*dy);
+
+    if(distance<140 && distance>0 && !reducedMotion){
+      p.x-=dx/distance*.5;
+      p.y-=dy/distance*.5;
+    }
+
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fillStyle="rgba(111,171,255,.65)";
+    ctx.fill();
+
+    for(let j=i+1;j<particles.length;j++){
+      const q=particles[j];
+      const x=p.x-q.x;
+      const y=p.y-q.y;
+      const d=Math.sqrt(x*x+y*y);
+
+      if(d<115){
+        ctx.beginPath();
+        ctx.moveTo(p.x,p.y);
+        ctx.lineTo(q.x,q.y);
+        ctx.strokeStyle=`rgba(72,139,225,${(1-d/115)*.16})`;
+        ctx.lineWidth=.7;
+        ctx.stroke();
+      }
+    }
+  }
+
+  if(!reducedMotion){
+    animationFrame=requestAnimationFrame(draw);
+  }
+}
+
+canvas.addEventListener("pointermove",e=>{
+  mouse.x=e.clientX;
+  mouse.y=e.clientY;
+});
+
+canvas.addEventListener("pointerleave",()=>{
+  mouse.x=-1000;
+  mouse.y=-1000;
+});
+
+window.addEventListener("resize",()=>{
+  cancelAnimationFrame(animationFrame);
+  resize();
+  draw();
+});
+
+resize();
+draw();
+</script>
+
+</body>
+</html>
