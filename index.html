@@ -7,6 +7,35 @@
 <meta name="theme-color" content="#05080e">
 <meta name="description" content="The official digital home of Mark Garbee — technology, cybersecurity, programming and digital innovation.">
 <meta name="author" content="Mark Garbee">
+<link rel="canonical" href="https://markgarbee.github.io/">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Mark Garbee — Technology & Cybersecurity">
+<meta property="og:description" content="The official digital home of Mark Garbee — technology, cybersecurity, programming and digital innovation.">
+<meta property="og:url" content="https://markgarbee.github.io/">
+<meta property="og:image" content="https://markgarbee.github.io/mark-garbee-github-profile.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mark Garbee — Technology & Cybersecurity">
+<meta name="twitter:description" content="Technology, cybersecurity, programming and digital innovation.">
+<meta name="twitter:image" content="https://markgarbee.github.io/mark-garbee-github-profile.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Mark Garbee",
+  "url": "https://markgarbee.github.io/",
+  "image": "https://markgarbee.github.io/mark-garbee-github-profile.jpg",
+  "jobTitle": "Technology and Cybersecurity Enthusiast",
+  "description": "Technology enthusiast interested in cybersecurity, ethical hacking, open-source intelligence (OSINT), programming, networking and digital innovation.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Monrovia",
+    "addressCountry": "Liberia"
+  },
+  "sameAs": [
+    "https://github.com/markgarbee"
+  ]
+}
+</script>
   <meta name="google-site-verification" content="6fwag2DmOGj2V-uSKnBacilFVF8XHfUEespaXMRQw2E" />
   <meta name="msvalidate.01" content="3BCEE77070B7800DF07C0021B6641B5D" />
 <title>Mark Garbee — Technology & Cybersecurity</title>
@@ -85,6 +114,17 @@ header{
 .menu-btn{
   display:none;background:none;border:0;
   color:white;font-size:25px;cursor:pointer;
+}
+
+
+/* PROFILE PHOTOGRAPH */
+.hero-profile{
+  width:104px;height:104px;object-fit:cover;
+  border-radius:50%;
+  border:2px solid rgba(117,181,255,.75);
+  box-shadow:0 0 35px rgba(67,140,255,.22);
+  margin-bottom:28px;
+  display:block;
 }
 
 /* HERO */
@@ -297,6 +337,7 @@ footer{border-top:1px solid var(--line);padding:30px 0}
   .side-label{display:none}
 }
 @media(max-width:500px){
+  .hero-profile{width:86px;height:86px;margin-bottom:22px}
   .container{width:88%}
   .hero h1{font-size:58px;letter-spacing:-4px}
   .hero-description{font-size:13px}
@@ -347,6 +388,14 @@ footer{border-top:1px solid var(--line);padding:30px 0}
     <div class="side-label">TECHNOLOGY / CYBERSPACE / INNOVATION</div>
 
     <div class="hero-content">
+      <img
+        class="hero-profile"
+        src="mark-garbee-github-profile.jpg"
+        alt="Portrait of Mark Garbee"
+        width="104"
+        height="104"
+        fetchpriority="high"
+      >
       <div class="eyebrow">
         <span class="dot"></span>
         PERSONAL DIGITAL IDENTITY
@@ -413,6 +462,7 @@ footer{border-top:1px solid var(--line);padding:30px 0}
           <h3>Mark Garbee</h3>
           <p>Technology & Cybersecurity Enthusiast</p>
           <div class="card-line"></div>
+          <div class="card-detail"><span>Location</span><span>Monrovia, Liberia</span></div>
           <div class="card-detail"><span>Primary field</span><span>Technology</span></div>
           <div class="card-detail"><span>Interests</span><span>Cybersecurity</span></div>
           <div class="card-detail"><span>Development</span><span>Programming</span></div>
