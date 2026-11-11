@@ -122,7 +122,11 @@ header{
 
 /* PROFILE PHOTOGRAPH */
 .hero-profile{
-  width:104px;height:104px;object-fit:cover;
+  width:104px;
+  height:104px;
+  object-fit:contain;
+  object-position:center center;
+  background:#0a101a;
   border-radius:50%;
   border:2px solid rgba(117,181,255,.75);
   box-shadow:0 0 35px rgba(67,140,255,.22);
@@ -300,7 +304,7 @@ section{padding:115px 0}
   max-width:480px;margin:auto;
   color:#91a2ba;font-size:13px;line-height:1.9;
 }
-.contact-box .btn{margin-top:30px}
+.contact-box .btn{margin:30px 8px 0}
 
 /* FOOTER */
 footer{border-top:1px solid var(--line);padding:30px 0}
@@ -340,7 +344,13 @@ footer{border-top:1px solid var(--line);padding:30px 0}
   .side-label{display:none}
 }
 @media(max-width:500px){
-  .hero-profile{width:86px;height:86px;margin-bottom:22px}
+  .hero-profile{
+    width:86px;
+    height:86px;
+    object-fit:contain;
+    object-position:center center;
+    margin-bottom:22px;
+  }
   .container{width:88%}
   .hero h1{font-size:58px;letter-spacing:-4px}
   .hero-description{font-size:13px}
@@ -381,7 +391,7 @@ footer{border-top:1px solid var(--line);padding:30px 0}
     </nav>
 
     <a href="#contact" class="nav-cta">LET'S CONNECT ↗</a>
-    <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation">☰</button>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false">☰</button>
   </div>
 </header>
 
